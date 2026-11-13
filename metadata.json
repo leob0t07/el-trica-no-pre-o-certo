@@ -1,0 +1,6 @@
+{
+  "name": "Elétrica no Preço Certo",
+  "description": "Diagnóstico interativo e aplicativo de orçamentos de elétrica por áudio com geração de PDF para WhatsApp.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
