@@ -10,12 +10,10 @@ export const CoverStep: React.FC<CoverStepProps> = ({ onStart }) => {
     <section id="capa" className="step-enter px-4 pt-5 pb-8 flex flex-col gap-5">
       <div className="text-center space-y-3">
         <h1 className="font-display text-[24px] sm:text-[26px] leading-[1.2] font-extrabold tracking-tight text-slate-900">
-          Eletricista que calcula orçamento de <span className="hl">cabeça</span> ou no caderno está{' '}
-          <span className="warn">tomando prejuízo</span> em material ou deixando lucro escapar
+          Grave um áudio e mande um <span className="hl">orçamento profissional</span> na hora.
         </h1>
         <p className="text-[15px] leading-relaxed text-slate-600 max-w-[400px] mx-auto">
-            Faça orçamentos profissionais de elétrica com áudio em{' '}
-          <strong className="text-slate-900 font-bold">menos de 1 minuto</strong> pra lucrar mais e fechar serviços na hora.
+          Nunca mais tome prejuízo por esquecer de somar materiais. Orçamento em menos de um minuto o cliente responde na hora!
         </p>
       </div>
 
