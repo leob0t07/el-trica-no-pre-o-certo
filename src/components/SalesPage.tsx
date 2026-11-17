@@ -38,6 +38,13 @@ export const SalesPage: React.FC<SalesPageProps> = ({ onRestartQuiz }) => {
     }
   };
 
+  const scrollToOfferBox = () => {
+    const el = document.getElementById('checkout-box');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
+
   return (
     <div id="oferta" className="step-enter pb-12">
       {/* Barra Superior */}
@@ -168,16 +175,14 @@ export const SalesPage: React.FC<SalesPageProps> = ({ onRestartQuiz }) => {
             </div>
           </div>
 
-          <a
-            href={CHECKOUT_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={trackInitiateCheckout}
+          <button
+            type="button"
+            onClick={scrollToOfferBox}
             className="btn--pulse w-full min-h-[56px] px-6 py-3.5 rounded-2xl bg-[#16A34A] hover:bg-[#15803D] active:scale-[0.985] text-white font-display font-bold text-[17px] flex items-center justify-center gap-2 transition-all cursor-pointer"
           >
             <span>Garantir meu acesso</span>
             <ArrowRight className="w-5 h-5" />
-          </a>
+          </button>
         </section>
 
         {/* SEÇÃO 2: Benefícios Diretos (3 Cards) */}
