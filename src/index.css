@@ -121,3 +121,13 @@
 details summary::-webkit-details-marker {
   display: none;
 }
+
+/* Hide scrollbars on horizontal snap carousel */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+

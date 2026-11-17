@@ -9,9 +9,7 @@ export type StepId =
   | 'tempo-orcamento'
   | 'o-que-atrapalha'
   | 'usaria-app'
-  | 'perdendo-dinheiro'
   | 'diagnostico'
-  | 'como-usar'
   | 'oferta';
 
 export type QuestionKey =
@@ -51,9 +49,7 @@ export const STEP_ORDER: StepId[] = [
   'tempo-orcamento',
   'o-que-atrapalha',
   'usaria-app',
-  'perdendo-dinheiro',
   'diagnostico',
-  'como-usar',
   'oferta',
 ];
 

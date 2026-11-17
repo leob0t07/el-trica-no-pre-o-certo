@@ -10,9 +10,7 @@ import { QuizHeader } from './components/QuizHeader';
 import { CoverStep } from './components/CoverStep';
 import { QuestionStep } from './components/QuestionStep';
 import { InteractiveDemoStep } from './components/InteractiveDemoStep';
-import { PainAgitatorStep } from './components/PainAgitatorStep';
 import { DiagnosisStep } from './components/DiagnosisStep';
-import { HowToUseStep } from './components/HowToUseStep';
 import { SalesPage } from './components/SalesPage';
 
 const STORAGE_KEY = 'eletrica_preco_certo_state_v1';
@@ -26,9 +24,14 @@ function loadPersistedState(): PersistedState {
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) return { stepId: 'capa', answers: {} };
-    const parsed = JSON.parse(raw) as Partial<PersistedState>;
+    const parsed = JSON.parse(raw) as { stepId?: string; answers?: QuizAnswers };
+    let mappedStep: string | undefined = parsed.stepId;
+    if (mappedStep === 'perdendo-dinheiro') mappedStep = 'diagnostico';
+    if (mappedStep === 'como-usar') mappedStep = 'oferta';
     const validStep =
-      parsed.stepId && STEP_ORDER.includes(parsed.stepId) ? parsed.stepId : 'capa';
+      mappedStep && STEP_ORDER.includes(mappedStep as StepId)
+        ? (mappedStep as StepId)
+        : 'capa';
     const validAnswers =
       parsed.answers && typeof parsed.answers === 'object' ? parsed.answers : {};
     return { stepId: validStep, answers: validAnswers };
@@ -124,13 +127,9 @@ export default function App() {
 
           {stepId === 'orcamento-detalhado' && <InteractiveDemoStep onNext={goNext} />}
 
-          {stepId === 'perdendo-dinheiro' && <PainAgitatorStep onNext={goNext} />}
-
           {stepId === 'diagnostico' && (
             <DiagnosisStep answers={answers} onNext={goNext} />
           )}
-
-          {stepId === 'como-usar' && <HowToUseStep onNext={goNext} />}
 
           {stepId === 'oferta' && <SalesPage onRestartQuiz={handleRestartQuiz} />}
         </div>

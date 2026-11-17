@@ -14,6 +14,7 @@ import {
 import { SERVICE_CHIPS, SEM_LIST, COM_LIST, FAQ_ITEMS } from '../data/quizData';
 import { WhatsAppComparison } from './WhatsAppComparison';
 import { GuaranteeSealSvg } from './GuaranteeSealSvg';
+import { SocialProofSection } from './SocialProofSection';
 
 const CHECKOUT_URL = 'https://pay.cakto.com.br/vfmiza6_1320431';
 
@@ -68,9 +69,42 @@ export const SalesPage: React.FC<SalesPageProps> = ({ onRestartQuiz }) => {
         </div>
       </header>
 
-      <div className="px-4 space-y-10 pt-6">
-        {/* SEÇÃO 1: Hero da Oferta */}
-        <section className="space-y-4">
+      <div className="px-4 space-y-10 pt-5">
+        {/* SEÇÃO 1: Bloco de Alerta de Dor + Hero da Oferta */}
+        <section className="space-y-5">
+          {/* Bloco de Alerta de Dor */}
+          <div className="rounded-2xl bg-red-50/90 border border-red-200 p-4 space-y-3 shadow-xs">
+            <h3 className="font-display text-[15px] leading-snug font-extrabold text-red-900">
+              ⚠️ Atenção, Eletricista: Você pode estar perdendo dinheiro agora...
+            </h3>
+            <ul className="space-y-2 text-[13px] leading-snug text-slate-800">
+              <li className="flex items-start gap-2">
+                <span className="w-5 h-5 rounded-full bg-red-100 text-[#DC2626] flex items-center justify-center shrink-0 mt-0.5">
+                  <X className="w-3.5 h-3.5 stroke-[2.75]" />
+                </span>
+                <span>
+                  Não calcula todo o material miúdo (fitas, bornes, buchas) e toma prejuízo na compra.
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="w-5 h-5 rounded-full bg-red-100 text-[#DC2626] flex items-center justify-center shrink-0 mt-0.5">
+                  <X className="w-3.5 h-3.5 stroke-[2.75]" />
+                </span>
+                <span>
+                  Faz contas de cabeça ou no caderno e demora horas para enviar o orçamento.
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="w-5 h-5 rounded-full bg-red-100 text-[#DC2626] flex items-center justify-center shrink-0 mt-0.5">
+                  <X className="w-3.5 h-3.5 stroke-[2.75]" />
+                </span>
+                <span>
+                  Perde o serviço porque o cliente acha o preço confuso ou some no WhatsApp.
+                </span>
+              </li>
+            </ul>
+          </div>
+
           <div className="text-center space-y-2.5">
             <h1 className="font-display text-[25px] sm:text-[28px] leading-[1.2] font-extrabold tracking-tight text-slate-900">
               Faça <strong className="text-[#0B4FC0]">orçamentos profissionais de elétrica</strong> em{' '}
@@ -80,7 +114,7 @@ export const SalesPage: React.FC<SalesPageProps> = ({ onRestartQuiz }) => {
               , só mandando um áudio
             </h1>
             <p className="text-xs font-semibold text-[#16A34A]">
-              Acesso na hora · direto no seu WhatsApp
+              Acesso na hora · direto no seu WhatsApp (Sem mensalidade)
             </p>
           </div>
 
@@ -323,6 +357,9 @@ export const SalesPage: React.FC<SalesPageProps> = ({ onRestartQuiz }) => {
             </div>
           </div>
         </section>
+
+        {/* SEÇÃO DE PROVA SOCIAL (Prints Reais de WhatsApp) */}
+        <SocialProofSection onScrollToOffer={scrollToOfferBox} />
 
         {/* SEÇÃO 6: Ancoragem e Box de Oferta Irresistível */}
         <section id="checkout-box" className="space-y-4 scroll-mt-20">
