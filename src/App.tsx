@@ -96,8 +96,14 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#F1F5F9] sm:py-6 flex flex-col items-center">
-      {/* Container principal mobile-first max-width: 480px */}
-      <main className="w-full max-w-[480px] min-h-screen sm:min-h-0 bg-[#F8FAFC] sm:rounded-3xl sm:border sm:border-slate-200/90 sm:shadow-xl overflow-x-hidden flex flex-col">
+      {/* Container principal mobile-first (expande no desktop na Página de Vendas) */}
+      <main
+        className={`w-full min-h-screen sm:min-h-0 bg-[#F8FAFC] sm:rounded-3xl sm:border sm:border-slate-200/90 sm:shadow-xl overflow-x-hidden flex flex-col transition-all ${
+          isSalesPage
+            ? 'max-w-[480px] md:max-w-[780px] lg:max-w-[980px]'
+            : 'max-w-[480px]'
+        }`}
+      >
         {!isSalesPage && (
           <QuizHeader
             canGoBack={currentIndex > 0}
