@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import {
   STEP_ORDER,
   StepId,
@@ -8,10 +8,22 @@ import {
 } from './data/quizData';
 import { QuizHeader } from './components/QuizHeader';
 import { CoverStep } from './components/CoverStep';
-import { QuestionStep } from './components/QuestionStep';
-import { InteractiveDemoStep } from './components/InteractiveDemoStep';
-import { DiagnosisStep } from './components/DiagnosisStep';
-import { SalesPage } from './components/SalesPage';
+
+// Lazy-load secondary funnel steps so initial landing bundle loads instantly
+const QuestionStep = lazy(() =>
+  import('./components/QuestionStep').then((m) => ({ default: m.QuestionStep }))
+);
+const InteractiveDemoStep = lazy(() =>
+  import('./components/InteractiveDemoStep').then((m) => ({
+    default: m.InteractiveDemoStep,
+  }))
+);
+const DiagnosisStep = lazy(() =>
+  import('./components/DiagnosisStep').then((m) => ({ default: m.DiagnosisStep }))
+);
+const SalesPage = lazy(() =>
+  import('./components/SalesPage').then((m) => ({ default: m.SalesPage }))
+);
 
 const STORAGE_KEY = 'eletrica_preco_certo_state_v1';
 
@@ -53,6 +65,25 @@ export default function App() {
       // Ignore storage quota / privacy mode errors
     }
   }, [stepId, answers]);
+
+  // Silent background prefetch of upcoming steps for zero-delay transitions
+  useEffect(() => {
+    if (stepId === 'capa') {
+      const timer = window.setTimeout(() => {
+        void import('./components/QuestionStep');
+      }, 300);
+      return () => window.clearTimeout(timer);
+    }
+    if (stepId === 'reacao-preco') {
+      void import('./components/InteractiveDemoStep');
+    }
+    if (stepId === 'usaria-app') {
+      void import('./components/DiagnosisStep');
+    }
+    if (stepId === 'diagnostico') {
+      void import('./components/SalesPage');
+    }
+  }, [stepId]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -123,21 +154,29 @@ export default function App() {
         <div className="flex-1">
           {stepId === 'capa' && <CoverStep onStart={goNext} />}
 
-          {currentQuestion && (
-            <QuestionStep
-              question={currentQuestion}
-              selectedAnswer={answers[currentQuestion.id]}
-              onSelect={(answer) => handleAnswerSelect(currentQuestion.id, answer)}
-            />
-          )}
+          <Suspense
+            fallback={
+              <div className="px-4 py-12 flex justify-center">
+                <div className="w-7 h-7 rounded-full border-3 border-slate-200 border-t-[#0B4FC0] animate-spin" />
+              </div>
+            }
+          >
+            {currentQuestion && (
+              <QuestionStep
+                question={currentQuestion}
+                selectedAnswer={answers[currentQuestion.id]}
+                onSelect={(answer) => handleAnswerSelect(currentQuestion.id, answer)}
+              />
+            )}
 
-          {stepId === 'orcamento-detalhado' && <InteractiveDemoStep onNext={goNext} />}
+            {stepId === 'orcamento-detalhado' && <InteractiveDemoStep onNext={goNext} />}
 
-          {stepId === 'diagnostico' && (
-            <DiagnosisStep answers={answers} onNext={goNext} />
-          )}
+            {stepId === 'diagnostico' && (
+              <DiagnosisStep answers={answers} onNext={goNext} />
+            )}
 
-          {stepId === 'oferta' && <SalesPage onRestartQuiz={handleRestartQuiz} />}
+            {stepId === 'oferta' && <SalesPage onRestartQuiz={handleRestartQuiz} />}
+          </Suspense>
         </div>
       </main>
     </div>

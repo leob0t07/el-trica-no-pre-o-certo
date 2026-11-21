@@ -16,10 +16,10 @@ import { SERVICE_CHIPS, SEM_LIST, COM_LIST, FAQ_ITEMS } from '../data/quizData';
 import { WhatsAppComparison } from './WhatsAppComparison';
 import { GuaranteeSealSvg } from './GuaranteeSealSvg';
 import { SocialProofSection } from './SocialProofSection';
-import antesImg from '../images/antes.jpg';
-import depoisImg from '../images/depois.jpg';
-import quadroCampoImg from '../assets/images/eletricista_quadro_campo_1795111467710.jpg';
-import celularObraImg from '../assets/images/eletricista_celular_obra_1795111468449.jpg';
+import antesImg from '../assets/optimized/antes.webp';
+import depoisImg from '../assets/optimized/depois.webp';
+import quadroCampoImg from '../assets/optimized/eletricista_quadro_campo.webp';
+import celularObraImg from '../assets/optimized/eletricista_celular_obra.webp';
 
 const CHECKOUT_URL = 'https://pay.cakto.com.br/vfmiza6_1320431';
 
@@ -265,6 +265,10 @@ export const SalesPage: React.FC<SalesPageProps> = ({ onRestartQuiz }) => {
               <img
                 src={antesImg}
                 alt="Sem o app: eletricista tomando prejuízo fazendo contas confusas no caderno"
+                width={520}
+                height={696}
+                loading="lazy"
+                decoding="async"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover aspect-[3/4] block"
               />
@@ -279,6 +283,10 @@ export const SalesPage: React.FC<SalesPageProps> = ({ onRestartQuiz }) => {
               <img
                 src={depoisImg}
                 alt="Com o app: eletricista gravando áudio e fechando orçamento de R$ 1.150,00"
+                width={520}
+                height={696}
+                loading="lazy"
+                decoding="async"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover aspect-[3/4] block"
               />
@@ -294,6 +302,10 @@ export const SalesPage: React.FC<SalesPageProps> = ({ onRestartQuiz }) => {
               <img
                 src={quadroCampoImg}
                 alt="Eletricista inspecionando quadro de distribuição com multímetro"
+                width={800}
+                height={597}
+                loading="lazy"
+                decoding="async"
                 referrerPolicy="no-referrer"
                 className="w-full h-56 md:h-full object-cover block"
               />
@@ -369,6 +381,10 @@ export const SalesPage: React.FC<SalesPageProps> = ({ onRestartQuiz }) => {
               <img
                 src={celularObraImg}
                 alt="Eletricista na obra gravando áudio no celular para gerar orçamento"
+                width={800}
+                height={597}
+                loading="lazy"
+                decoding="async"
                 referrerPolicy="no-referrer"
                 className="w-full h-60 md:h-72 object-cover block"
               />

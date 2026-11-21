@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
-import antesImg from '../images/antes.jpg';
-import depoisImg from '../images/depois.jpg';
+import antesImg from '../assets/optimized/antes.webp';
+import depoisImg from '../assets/optimized/depois.webp';
 
 interface CoverStepProps {
   onStart: () => void;
@@ -31,6 +31,10 @@ export const CoverStep: React.FC<CoverStepProps> = ({ onStart }) => {
             <img
               src={antesImg}
               alt="Antes: eletricista quebrando a cabeça com contas confusas no caderno"
+              width={520}
+              height={696}
+              decoding="async"
+              fetchPriority="high"
               referrerPolicy="no-referrer"
               onError={() => setAntesError(true)}
               className="w-full h-full object-cover block aspect-[3/4]"
@@ -47,6 +51,10 @@ export const CoverStep: React.FC<CoverStepProps> = ({ onStart }) => {
             <img
               src={depoisImg}
               alt="Depois: eletricista sorrindo gravando áudio e gerando orçamento de R$ 1.150,00"
+              width={520}
+              height={696}
+              decoding="async"
+              fetchPriority="high"
               referrerPolicy="no-referrer"
               onError={() => setDepoisError(true)}
               className="w-full h-full object-cover block aspect-[3/4]"

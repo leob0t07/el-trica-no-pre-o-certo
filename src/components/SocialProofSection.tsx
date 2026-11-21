@@ -8,12 +8,10 @@ import {
   X,
   ZoomIn,
 } from 'lucide-react';
-import obraChuveiroImg from '../assets/images/obra_chuveiro_disjuntor_1795111467035.jpg';
-import quadroCampoImg from '../assets/images/eletricista_quadro_campo_1795111467710.jpg';
-import dep01eImg from '../images/dep01e.jpg';
-import dep02eImg from '../images/dep02e.jpg';
-import dep03eImg from '../images/dep03e.jpg';
-import dep04eImg from '../images/dep04e.jpg';
+import dep01eImg from '../assets/optimized/dep01e.webp';
+import dep02eImg from '../assets/optimized/dep02e.webp';
+import dep03eImg from '../assets/optimized/dep03e.webp';
+import dep04eImg from '../assets/optimized/dep04e.webp';
 
 export interface PrintSlotItem {
   id: number;
@@ -40,7 +38,7 @@ const PRINT_SLOTS: PrintSlotItem[] = [
     slotLabel: '[INSERIR IMAGEM DO PRINT 1]',
     contactName: 'Eletricista · Obra Residencial',
     serviceContext: 'Quadro de Distribuição · Áudio na Obra',
-    photoSrc: quadroCampoImg,
+    photoSrc: dep01eImg,
     photoAlt: 'Print de conversa no WhatsApp mostrando quadro elétrico e envio de orçamento por áudio na obra',
     pdfName: 'Orcamento-Eletrica-Obra.pdf',
     pdfMeta: '1 página · 184 kB',
@@ -54,7 +52,7 @@ const PRINT_SLOTS: PrintSlotItem[] = [
     slotLabel: '[INSERIR IMAGEM DO PRINT 2]',
     contactName: 'Eletricista · Reforma Elétrica',
     serviceContext: 'Disjuntor DR, Cabo e Mão de Obra',
-    photoSrc: quadroCampoImg,
+    photoSrc: dep02eImg,
     photoAlt: 'Print de conversa no WhatsApp sobre conferência de disjuntor DR, cabo e mão de obra no app',
     pdfName: 'Orcamento-Eletrica-DR.pdf',
     pdfMeta: '1 página · 182 kB',
@@ -68,7 +66,7 @@ const PRINT_SLOTS: PrintSlotItem[] = [
     slotLabel: '[INSERIR IMAGEM DO PRINT 3]',
     contactName: 'Eletricista · Quadro Novo',
     serviceContext: 'Troca de Quadro · Fechou na Hora',
-    photoSrc: quadroCampoImg,
+    photoSrc: dep03eImg,
     photoAlt: 'Print de conversa no WhatsApp mostrando quadro finalizado após orçamento gravado na obra',
     pdfName: 'Orcamento-Quadro-Eletrica.pdf',
     pdfMeta: '1 página · 195 kB',
@@ -82,7 +80,7 @@ const PRINT_SLOTS: PrintSlotItem[] = [
     slotLabel: '[INSERIR IMAGEM DO PRINT 4]',
     contactName: 'Eletricista · Infraestrutura',
     serviceContext: 'PDF Separado · Sem Choro de Desconto',
-    photoSrc: obraChuveiroImg,
+    photoSrc: dep04eImg,
     photoAlt: 'Print de conversa no WhatsApp mostrando instalação em eletrocalha e Pix recebido sem choro',
     pdfName: 'Orcamento-Instalacao-PDF.pdf',
     pdfMeta: '1 página · 210 kB',
@@ -155,6 +153,10 @@ export const SocialProofSection: React.FC<SocialProofSectionProps> = ({
             <img
               src={item.customPrintImage}
               alt={item.photoAlt}
+              width={560}
+              height={1003}
+              loading={isZoomed ? 'eager' : 'lazy'}
+              decoding="async"
               referrerPolicy="no-referrer"
               className={`w-full block bg-[#0B141A] ${
                 isZoomed
