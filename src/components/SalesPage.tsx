@@ -21,7 +21,7 @@ import depoisImg from '../assets/optimized/depois.webp';
 import quadroCampoImg from '../assets/optimized/eletricista_quadro_campo.webp';
 import celularObraImg from '../assets/optimized/eletricista_celular_obra.webp';
 
-const CHECKOUT_URL = 'https://pay.kiwify.com.br/3RYjUgj';
+const CHECKOUT_URL = 'https://pay.cakto.com.br/vfmiza6_1320431';
 
 interface SalesPageProps {
   onRestartQuiz: () => void;
@@ -30,17 +30,31 @@ interface SalesPageProps {
 export const SalesPage: React.FC<SalesPageProps> = ({ onRestartQuiz }) => {
   const [pdfToast, setPdfToast] = useState(false);
 
-  const trackInitiateCheckout = () => {
+  const trackCheckoutClick = (buttonLocation: string) => {
     window.dispatchEvent(
-      new CustomEvent('InitiateCheckout', {
-        detail: { value: 29.9, currency: 'BRL', product: 'Elétrica no Preço Certo' },
+      new CustomEvent('clique_bt_checkout', {
+        detail: {
+          value: 29.9,
+          currency: 'BRL',
+          product: 'Elétrica no Preço Certo',
+          buttonLocation,
+        },
       })
     );
     const w = window as unknown as {
       fbq?: (action: string, event: string, data?: Record<string, unknown>) => void;
+      clarity?: (action: string, event: string) => void;
     };
     if (typeof w.fbq === 'function') {
-      w.fbq('track', 'InitiateCheckout', { value: 29.9, currency: 'BRL' });
+      w.fbq('trackCustom', 'clique_bt_checkout', {
+        value: 29.9,
+        currency: 'BRL',
+        product: 'Elétrica no Preço Certo',
+        button_location: buttonLocation,
+      });
+    }
+    if (typeof w.clarity === 'function') {
+      w.clarity('event', 'clique_bt_checkout');
     }
   };
 
@@ -549,7 +563,7 @@ export const SalesPage: React.FC<SalesPageProps> = ({ onRestartQuiz }) => {
                 href={CHECKOUT_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={trackInitiateCheckout}
+                onClick={() => trackCheckoutClick('offer_box')}
                 className="btn--pulse w-full min-h-[58px] px-6 py-4 rounded-2xl bg-[#16A34A] hover:bg-[#15803D] active:scale-[0.985] text-white font-display font-extrabold text-lg flex items-center justify-center gap-2 transition-all cursor-pointer"
               >
                 <span>Garantir meu acesso</span>
@@ -605,7 +619,7 @@ export const SalesPage: React.FC<SalesPageProps> = ({ onRestartQuiz }) => {
               href={CHECKOUT_URL}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={trackInitiateCheckout}
+              onClick={() => trackCheckoutClick('faq_bottom')}
               className="btn--pulse w-full min-h-[58px] px-6 py-4 rounded-2xl bg-[#16A34A] hover:bg-[#15803D] active:scale-[0.985] text-white font-display font-extrabold text-lg flex items-center justify-center gap-2 transition-all cursor-pointer"
             >
               <span>Garantir meu acesso</span>
