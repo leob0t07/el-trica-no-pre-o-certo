@@ -21,7 +21,7 @@ import depoisImg from '../assets/optimized/depois.webp';
 import quadroCampoImg from '../assets/optimized/eletricista_quadro_campo.webp';
 import celularObraImg from '../assets/optimized/eletricista_celular_obra.webp';
 
-const CHECKOUT_URL = 'https://pay.cakto.com.br/vfmiza6_1320431';
+const CHECKOUT_URL = 'https://pay.kiwify.com.br/3RYjUgj';
 
 interface SalesPageProps {
   onRestartQuiz: () => void;
